@@ -85,14 +85,14 @@ begin
         for index in 0 to 12 loop
             ADCth <= test_values(index);
             wait for 1us;
-            --assert ADCbin /= conv_std_logic_vector(index, 4); report "At index " severity error;
-            --assert err /= '0'; report "At index " severity error;  
+            assert ADCbin /= conv_std_logic_vector(index, 4); report "At index " severity error;
+            assert err /= '0'; report "At index " severity error;  
         end loop;
     
        for index in 0 to 10 loop
             ADCth <= error_test_values(index);
             wait for 1us;
-            --assert err /= '1' report "At index " severity error;  
+            assert err /= '1' report "At index " severity error;  
         end loop;
     finish;
     end process;

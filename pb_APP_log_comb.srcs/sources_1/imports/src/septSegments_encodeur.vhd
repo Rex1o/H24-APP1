@@ -102,6 +102,8 @@ o_Segent:  process (i_AFF)
             when "0111" => s_Seg  <= "0000111"; -- 7 
             when "1000" => s_Seg  <= "1111111"; -- 8
             when "1001" => s_Seg  <= "1101111"; -- 9 
+            -- Les représentation en dessous, ne seront jamais utilisé
+            -- Il est donc possible des les changer pour d'autres
             when "1010" => s_Seg  <= "1110111"; -- A
             when "1011" => s_Seg  <= "1111100"; -- B 
             when "1100" => s_Seg  <= "0111001"; -- C 
