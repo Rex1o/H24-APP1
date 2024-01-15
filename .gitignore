@@ -18,6 +18,8 @@ pb_APP_log_comb.ip_user_files/
 pb_APP_log_comb.ip_user_files/*
 pb_APP_log_comb.sim/
 pb_APP_log_comb.sim/*
+pb_APP_log_comb.runs/
+pb_APP_log_comb.runs/*
 ###########################################################################
 ##	VIVADO
 #Source files:
