@@ -76,7 +76,7 @@ begin
            wait for 1us;
            if (par /= wanted_values(index)) then
             report "Impair parity | Expected par: " &  std_logic'image(wanted_values(index)) & " but received " & std_logic'image(par) severity error;
-            end if;
+           end if;
         end loop;
         
         pair <= '1';

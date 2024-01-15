@@ -34,7 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity Moins_5 is
     Port(
         X          : in STD_LOGIC_VECTOR(3 downto 0);
-        Difference : out STD_LOGIC_VECTOR(3 downto 0);
+        Difference : out STD_LOGIC_VECTOR(3 downto 0); -- Retourne la valeur en complement 2
         Cout       : out STD_LOGIC
     );
 end Moins_5;
