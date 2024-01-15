@@ -64,7 +64,11 @@ architecture BEHAVIORAL of AppCombi_top is
    signal Code_signe        : std_logic_vector (3 downto 0);
    signal Unites_s           : std_logic_vector (3 downto 0);
    
-   --Output of mux
+   -- Output of Fct2_3
+   signal A2_3 : std_logic_vector (2 downto 0);
+   
+   -- Output parite
+   signal partite_bit : std_logic;
    
  component synchro_module_v2 is
    generic (const_CLK_syst_MHz: integer := freq_sys_MHz);
@@ -124,6 +128,21 @@ architecture BEHAVIORAL of AppCombi_top is
         par : out STD_LOGIC
     );
    end component;
+   
+   component Fct2_3 is
+    Port (
+        ADCbin : in STD_LOGIC_VECTOR (3 downto 0);
+        A2_3 : out STD_LOGIC_VECTOR (2 downto 0)
+    );
+    end component;
+    
+    component Decodeur3_8 is
+     Port (
+        choice : in STD_LOGIC_VECTOR (2 downto 0);
+        output : out STD_LOGIC_VECTOR (7 downto 0) 
+     );
+    end component;
+
 begin
   
     inst_synch : synchro_module_v2
@@ -164,7 +183,7 @@ begin
     port map (
         ADCbin => ADCbin,
         pair => i_S1,
-        par => o_DEL2
+        par => partite_bit
     );
   
   inst_mux : Mux
@@ -180,6 +199,21 @@ begin
         AFF0 => d_AFF0,
         AFF1 => d_AFF1
     );
+    
+    inst_fct2_3 : FCT2_3
+     Port map(
+        ADCbin => ADCbin,
+        A2_3 => A2_3
+    );
+    
+    inst_decodeur3_8 : Decodeur3_8
+     port map (
+        choice => A2_3,
+        output => o_pmodled
+     );
+     
+   o_DEL2 <= partite_bit;
+   o_led(0) <= partite_bit;
 end BEHAVIORAL;
 
 

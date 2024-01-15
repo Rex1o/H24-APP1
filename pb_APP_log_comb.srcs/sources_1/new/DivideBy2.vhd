@@ -33,7 +33,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity DivideBy2 is
     Port ( Xin : in STD_LOGIC_VECTOR (3 downto 0);
-           Yout : out STD_LOGIC_VECTOR (3 downto 0)
+           Yout : out STD_LOGIC_VECTOR (3 downto 0);
+           YoutFloat : out STD_LOGIC_VECTOR (3 downto 0)
          );
 end DivideBy2;
 
@@ -44,4 +45,8 @@ begin
     Yout(2) <= Xin(3);
     Yout(1) <= Xin(2);
     Yout(0) <= Xin(1);
+    YoutFloat(3) <= Xin(0);
+    YoutFloat(2) <= '0';
+    YoutFloat(1) <= '0';
+    YoutFloat(0) <= '0';
 end Behavioral;

@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 01/13/2024 03:27:16 PM
+-- Create Date: 01/15/2024 02:21:35 PM
 -- Design Name: 
--- Module Name: Module8LED - Behavioral
+-- Module Name: Fct2_3 - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,22 +31,24 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Module8LED is
-    Port ( termoBin : in STD_LOGIC_VECTOR (3 downto 0);
-           LED : out STD_LOGIC_VECTOR (7 downto 0)
+entity Fct2_3 is
+    Port ( ADCbin : in STD_LOGIC_VECTOR (3 downto 0);
+           A2_3 : out STD_LOGIC_VECTOR (2 downto 0)
           );
-end Module8LED;
+end Fct2_3;
 
-architecture Behavioral of Module8LED is
+architecture Behavioral of Fct2_3 is
     component DivideBy2
         Port ( Xin : in STD_LOGIC_VECTOR (3 downto 0);
-               Yout : out STD_LOGIC_VECTOR (3 downto 0)
+               Yout : out STD_LOGIC_VECTOR (3 downto 0);
+               YoutFloat : out STD_LOGIC_VECTOR (3 downto 0)
               );
     end component;
     
     component DivideBy8
         Port ( Xin : in STD_LOGIC_VECTOR (3 downto 0);
-               Yout : out STD_LOGIC_VECTOR (3 downto 0)
+               Yout : out STD_LOGIC_VECTOR (3 downto 0);
+               YoutFloat : out STD_LOGIC_VECTOR (3 downto 0)
          );
     end component;
     
@@ -66,50 +68,41 @@ architecture Behavioral of Module8LED is
           );
     end component;
     
-    signal divide2ToAdd, divide8ToAdd, sumResult : STD_LOGIC_VECTOR (3 downto 0);
-    signal convertedSumResult : STD_LOGIC_VECTOR (2 downto 0);
-    signal carryOut : STD_LOGIC;
-    
+    signal divide2ToAdd, divide2FloatToAdd, divide8ToAdd, divide8FloatToAdd, sumResult, sumResultFloat : STD_LOGIC_VECTOR (3 downto 0);
+    signal carryOut, carryOutFloat : STD_LOGIC;
 begin
-    terme0 : DivideBy2
+
+terme0 : DivideBy2
         port map(
-            Xin => termoBin,
-            Yout => divide2ToAdd
+            Xin => ADCbin,
+            Yout => divide2ToAdd,
+            YoutFloat => divide2FloatToAdd
         );
         
     terme1 : DivideBy8
         port map(
-            Xin => termoBin,
-            Yout => divide8ToAdd
+            Xin => ADCbin,
+            Yout => divide8ToAdd,
+            YoutFloat => divide8FloatToAdd
         );
         
     adder : Add4Bit
         port map(
             X => divide2ToAdd,
             Y => divide8ToAdd,
-            Cin => '0',
+            Cin => carryOutFloat,
             Sum => sumResult,
             Cout => carryOut
         );
-            
-     
-     convertedSumResult(0) <= sumResult(0);
-     convertedSumResult(1) <= sumResult(1);
-     convertedSumResult(2) <= sumResult(2);
-     
-     ledChoice : Decodeur3_8
+        
+    adderFloat : Add4Bit
         port map(
-            choice => convertedSumResult,
-            output => LED
+            X => divide2FloatToAdd,
+            Y => divide8FloatToAdd,
+            Cin => '0',
+            Sum => sumResultFloat,
+            Cout => carryOutFloat
         );
-     
-        
             
-        
-        
-
-
-
-
-
+     A2_3 <= sumResult(2 downto 0);
 end Behavioral;
