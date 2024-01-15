@@ -36,7 +36,7 @@ entity Add4bit is
         X    : in  STD_LOGIC_VECTOR(3 DOWNTO 0);
         Y    : in  STD_LOGIC_VECTOR(3 DOWNTO 0);
         Cin  : in  STD_LOGIC; 
-        Sum    : out STD_LOGIC_VECTOR(3 DOWNTO 0);
+        Sum  : out STD_LOGIC_VECTOR(3 DOWNTO 0);
         Cout : out STD_LOGIC
     );
 end Add4bit;
@@ -60,5 +60,5 @@ begin
     add0 : Add1bitA port map (X => X(0), Y => Y(0), Cin => Cin, Cout => c0, Sum => Sum(0));
     add1 : Add1bitA port map (X => X(1), Y => Y(1), Cin => c0, Cout => c1, Sum => Sum(1));
     add2 : Add1bitB port map (X => X(2), Y => Y(2), Cin => c1, Cout => c2, Sum => Sum(2));
-    add3 : Add1bitB port map (X => X(3), Y => Y(3), Cin => c2, Cout => Cout, Sum => Sum(3));
+    add3 : Add1bitB port map (X => X(3), Y => Y(3), Cin => c2, Cout => Cout, Sum => Sum(3));    
 end Behavioral;
