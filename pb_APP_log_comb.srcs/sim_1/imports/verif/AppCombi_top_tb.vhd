@@ -168,6 +168,7 @@ uut: AppCombi_top
             ADC_th_sim <= code_valides(index);
             wait for 5ns;
         end loop;
+        ADC_th_sim <= "000000000000";
        -- Affichage de Er avec bouton 0 et 1
         btn_sim(0) <= '1';
         btn_sim(1) <= '1';
