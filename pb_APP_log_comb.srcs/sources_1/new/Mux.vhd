@@ -63,7 +63,7 @@ begin
             AFF0 <= Unites_s;
             AFF1 <= Code_signe; 
         else
-            AFF0 <= "1101"; -- E
+--            AFF0 <= "1101"; -- E
             AFF1 <= "1110";  -- r
         end if;
     end process;
